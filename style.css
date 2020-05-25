@@ -1,8 +1,41 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css";
+@import "https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css";
+
+#app {
+  background-color: #f9fafc;
+  box-shadow: 0 5px 20px #3131311f;
+  margin: 3rem 0;
+  padding: 1.75rem 1.75rem 2.5rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 2px solid #8492a6;
+}
+
+.controls__unit {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.controls__unit:first-child > span {
+  margin-right: auto;
+}
+
+.controls__unit:last-child > span {
+  margin-left: auto;
+}
+
+#map {
+  text-align: center;
+}
 
 .state {
   fill: #d3dce6;
   stroke: #d3dce6;
   cursor: pointer;
-  /* stroke-width: 0.5; */
 }

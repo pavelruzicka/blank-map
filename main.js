@@ -12,14 +12,31 @@ const regions = {};
 let regionSequence = [];
 let clickedRegions = [];
 
+function format(reg) {
+  return `Where is ${reg}?`;
+}
+
 function colorRegion(el, color) {
-  if (color === "green") {
-    el.style.fill = "#29EB7F";
-    el.style.stroke = "#13CE66";
-  } else {
-    el.style.fill = "#FF4949";
-    el.style.stroke = "#BF0000";
+  let fill, stroke;
+
+  switch (color) {
+    case "red":
+      fill = "#FF4949";
+      stroke = "#BF0000";
+      break;
+
+    case "blue":
+      fill = "#1FB6FF";
+      stroke = "#008cd0";
+      break;
+
+    default:
+      fill = "#29EB7F";
+      stroke = "#13CE66";
   }
+
+  el.style.fill = fill;
+  el.style.stroke = stroke;
 }
 
 function addRegionTitle(el) {
@@ -42,16 +59,20 @@ function handleRegionClick(event, OHKO) {
 
   if (current === id) {
     clickedRegions.push(regionSequence.shift());
-    elNext.textContent = regions[regionSequence[0]];
+    elNext.textContent = format(regions[regionSequence[0]]);
     elRemaining.textContent = --totalRegions;
 
     colorRegion(target, "green");
     addRegionTitle(target);
   } else if (OHKO) {
+    const actual = $(`#${current}`);
+
     live = 2;
 
     colorRegion(target, "red");
+    colorRegion(actual, "blue");
     addRegionTitle(target);
+    addRegionTitle(actual);
   }
 }
 
@@ -87,7 +108,7 @@ function prepareGame() {
 }
 
 (function () {
-  const borders = true;
+  const borders = false;
   const OHKO = true;
 
   if (borders) {
@@ -100,7 +121,7 @@ function prepareGame() {
   processRegions(OHKO);
   prepareGame();
 
-  elNext.textContent = regions[regionSequence[0]];
+  elNext.textContent = format(regions[regionSequence[0]]);
   elRemaining.textContent = totalRegions;
   elTotal.textContent = totalRegions;
 })();
