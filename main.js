@@ -68,6 +68,7 @@ function handleRegionClick(event, OHKO) {
     const actual = $(`#${current}`);
 
     live = 2;
+    elNext.textContent = `No, that's ${regions[id]}.`;
 
     colorRegion(target, "red");
     colorRegion(actual, "blue");

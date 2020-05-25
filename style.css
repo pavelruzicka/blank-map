@@ -20,10 +20,19 @@
   display: flex;
   flex: 1;
   justify-content: center;
+  align-items: center;
+}
+
+.controls__unit:first-child > svg {
+  margin-right: 0.5rem;
 }
 
 .controls__unit:first-child > span {
   margin-right: auto;
+}
+
+.controls__unit:last-child > svg {
+  margin-left: 0.5rem;
 }
 
 .controls__unit:last-child > span {
