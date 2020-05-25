@@ -3,4 +3,6 @@
 .state {
   fill: #d3dce6;
   stroke: #d3dce6;
+  cursor: pointer;
+  /* stroke-width: 0.5; */
 }
