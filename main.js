@@ -102,24 +102,52 @@ function shuffleRegions() {
   return regionIds;
 }
 
+function not(bool) {
+  return bool === "true" ? "false" : "true";
+}
+
+function prepareButtons() {
+  $("#btnRestart").addEventListener("click", () => {
+    location.reload();
+  });
+
+  const borders = localStorage.getItem("borders") || "true";
+  const minefield = localStorage.getItem("minefield") || "false";
+
+  [
+    { bool: borders, text: "borders", btn: $("#btnBorders") },
+    { bool: minefield, text: "minefield", btn: $("#btnMinefield") },
+  ].forEach((o) => {
+    o.btn.addEventListener("click", () => {
+      localStorage.setItem(o.text, not(o.bool));
+      location.reload();
+    });
+
+    o.btn.lastChild.textContent = `Turn ${o.bool === "true" ? "off" : "on"} ${
+      o.text
+    }`;
+  });
+
+  return [borders, minefield];
+}
+
+function drawBorders() {
+  const reg = $(".state");
+
+  reg.style.stroke = "#8492a6";
+  reg.style.strokeWidth = "0.5";
+}
+
 function prepareGame() {
   regionSequence = shuffleRegions();
-
-  console.log(regionSequence);
 }
 
 (function () {
-  const borders = false;
-  const OHKO = true;
+  const [borders, minefield] = prepareButtons();
 
-  if (borders) {
-    const reg = $(".state");
+  if (borders === "true") drawBorders();
 
-    reg.style.stroke = "#8492a6";
-    reg.style.strokeWidth = "0.5";
-  }
-
-  processRegions(OHKO);
+  processRegions(minefield === "true");
   prepareGame();
 
   elNext.textContent = format(regions[regionSequence[0]]);

@@ -1,11 +1,15 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css";
 @import "https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css";
 
+* {
+  box-sizing: border-box;
+}
+
 #app {
   background-color: #f9fafc;
   box-shadow: 0 5px 20px #3131311f;
-  margin: 3rem 0;
-  padding: 1.75rem 1.75rem 2.5rem;
+  margin: 2.4rem 0;
+  padding: 1.75rem 1.75rem 1.75rem;
 }
 
 .controls {
@@ -14,6 +18,7 @@
   padding-bottom: 1rem;
   margin-bottom: 2.5rem;
   border-bottom: 2px solid #8492a6;
+  color: #1f2d3d;
 }
 
 .controls__unit {
@@ -47,4 +52,35 @@
   fill: #d3dce6;
   stroke: #d3dce6;
   cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  margin-top: 2.5rem;
+  border-top: 2px solid #8492a6;
+}
+
+.buttons button {
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: #d3dce6;
+  padding: 8px 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.25rem;
+  color: #1f2d3d;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.buttons button:hover {
+  background-color: #c0ccda;
+}
+
+.buttons button svg {
+  margin-right: 0.5rem;
 }
