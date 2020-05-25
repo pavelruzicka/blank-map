@@ -2,6 +2,8 @@ const $ = document.querySelector.bind(document);
 const $$ = (s) => document.querySelectorAll(s);
 
 const elNext = $("#next");
+const elRemaining = $("#remaining");
+const elTotal = $("#total");
 
 // flags
 // let OHKO = true;
@@ -16,19 +18,14 @@ function handleRegionClick(event) {
     target: { id },
   } = event;
 
-  if (clickedRegions.includes(id)) {
-    return;
-  }
+  if (clickedRegions.includes(id)) return;
 
   const current = regionSequence[0];
-
-  console.log(current, id);
 
   if (current === id) {
     clickedRegions.push(regionSequence.shift());
     elNext.textContent = regions[regionSequence[0]];
-
-    console.log(regionSequence, clickedRegions);
+    elRemaining.textContent = --totalRegions;
 
     console.log("yep");
   } else {
@@ -72,4 +69,6 @@ function prepareGame() {
   prepareGame();
 
   elNext.textContent = regions[regionSequence[0]];
+  elRemaining.textContent = totalRegions;
+  elTotal.textContent = totalRegions;
 })();
