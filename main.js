@@ -5,9 +5,6 @@ const elNext = $("#next");
 const elRemaining = $("#remaining");
 const elTotal = $("#total");
 
-// flags
-// let OHKO = true;
-
 let totalRegions = 0;
 const regions = {};
 let regionSequence = [];
@@ -65,6 +62,12 @@ function prepareGame() {
 }
 
 (function () {
+  const borders = true;
+
+  if (borders) {
+    $(".state").style.stroke = "#8492a6";
+  }
+
   processRegions();
   prepareGame();
 
