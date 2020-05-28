@@ -157,14 +157,14 @@ function formatTime(seconds) {
   regionSequence = shuffleRegions();
 
   setInterval(() => {
-    if (live === 1) {
-      clock--;
-      elTime.textContent = formatTime(clock);
+    if (live !== 1) return;
 
-      if (clock === 0) {
-        live = 2;
-        elNext.textContent = "You've run out of time.";
-      }
+    clock--;
+    elTime.textContent = formatTime(clock);
+
+    if (clock === 0) {
+      live = 2;
+      elNext.textContent = "You've run out of time.";
     }
   }, 1000);
 
@@ -174,7 +174,6 @@ function formatTime(seconds) {
 })();
 
 // TODO
-// timer
 // copyright
 // responsive
 // code formatting
