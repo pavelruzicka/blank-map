@@ -4,8 +4,10 @@ const $$ = (s) => document.querySelectorAll(s);
 const elNext = $("#next");
 const elRemaining = $("#remaining");
 const elTotal = $("#total");
+const elTime = $("#time");
 
 let live = 0;
+let clock = 300;
 
 let totalRegions = 0;
 const regions = {};
@@ -13,7 +15,7 @@ let regionSequence = [];
 let clickedRegions = [];
 
 function format(reg) {
-  return `Where is ${reg}?`;
+  return reg ? `Where is ${reg}?` : `Well done!`;
 }
 
 function colorRegion(el, color) {
@@ -46,7 +48,7 @@ function addRegionTitle(el) {
   el.appendChild(title);
 }
 
-function handleRegionClick(event, OHKO) {
+function handleRegionClick(event, minefield) {
   if (live === 2) return;
   if (!live) live = 1;
 
@@ -62,9 +64,13 @@ function handleRegionClick(event, OHKO) {
     elNext.textContent = format(regions[regionSequence[0]]);
     elRemaining.textContent = --totalRegions;
 
+    if (!totalRegions) {
+      live = 0;
+    }
+
     colorRegion(target, "green");
     addRegionTitle(target);
-  } else if (OHKO) {
+  } else if (minefield) {
     const actual = $(`#${current}`);
 
     live = 2;
@@ -77,12 +83,12 @@ function handleRegionClick(event, OHKO) {
   }
 }
 
-function processRegions(OHKO) {
+function processRegions(minefield) {
   for (let region of $$("#map .state > path")) {
     totalRegions++;
     regions[region.id] = region.dataset.name;
 
-    region.addEventListener("click", (e) => handleRegionClick(e, OHKO));
+    region.addEventListener("click", (e) => handleRegionClick(e, minefield));
   }
 }
 
@@ -138,8 +144,8 @@ function drawBorders() {
   reg.style.strokeWidth = "0.5";
 }
 
-function prepareGame() {
-  regionSequence = shuffleRegions();
+function formatTime(seconds) {
+  return `${(seconds / 60) | 0}:${seconds % 60}`;
 }
 
 (function () {
@@ -148,9 +154,30 @@ function prepareGame() {
   if (borders === "true") drawBorders();
 
   processRegions(minefield === "true");
-  prepareGame();
+  regionSequence = shuffleRegions();
+
+  setInterval(() => {
+    if (live === 1) {
+      clock--;
+      elTime.textContent = formatTime(clock);
+
+      if (clock === 0) {
+        live = 2;
+        elNext.textContent = "You've run out of time.";
+      }
+    }
+  }, 1000);
 
   elNext.textContent = format(regions[regionSequence[0]]);
   elRemaining.textContent = totalRegions;
   elTotal.textContent = totalRegions;
 })();
+
+// TODO
+// timer
+// copyright
+// responsive
+// code formatting
+// local over cdn
+// title favicon etc
+// php includes and stuff
