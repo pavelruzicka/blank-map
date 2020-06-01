@@ -15,7 +15,7 @@ let regionSequence = [];
 let clickedRegions = [];
 
 function format(reg) {
-  return reg ? `Where is ${reg}?` : `Well done!`;
+  return reg ? `Where is <strong>${reg}</strong>?` : `Well done!`;
 }
 
 function colorRegion(el, color) {
@@ -61,7 +61,7 @@ function handleRegionClick(event, minefield) {
 
   if (current === id) {
     clickedRegions.push(regionSequence.shift());
-    elNext.textContent = format(regions[regionSequence[0]]);
+    elNext.innerHTML = format(regions[regionSequence[0]]);
     elRemaining.textContent = --totalRegions;
 
     if (!totalRegions) {
@@ -74,7 +74,7 @@ function handleRegionClick(event, minefield) {
     const actual = $(`#${current}`);
 
     live = 2;
-    elNext.textContent = `No, that's ${regions[id]}.`;
+    elNext.innerHTML = `No, that's <strong>${regions[id]}</strong>.`;
 
     colorRegion(target, "red");
     colorRegion(actual, "blue");
@@ -168,15 +168,13 @@ function formatTime(seconds) {
     }
   }, 1000);
 
-  elNext.textContent = format(regions[regionSequence[0]]);
+  elNext.innerHTML = format(regions[regionSequence[0]]);
   elRemaining.textContent = totalRegions;
   elTotal.textContent = totalRegions;
 })();
 
 // TODO
-// copyright
 // responsive
 // code formatting
 // local over cdn
-// title favicon etc
 // php includes and stuff
