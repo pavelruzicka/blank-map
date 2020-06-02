@@ -172,7 +172,3 @@ function formatTime(seconds) {
   elRemaining.textContent = totalRegions;
   elTotal.textContent = totalRegions;
 })();
-
-// TODO
-// local over cdn
-// php includes and stuff
