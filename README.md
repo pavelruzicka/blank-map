@@ -1,5 +1,7 @@
 # blankmap
 
+**[Play now!](https://pavelruzicka.com/blankmap/)**
+
 An easy game to help you locate US states on a blank map. Options include minefield mode (also known as one hit knockout) and toggleable borders. Made for PV219.
 
 ### Deployment
