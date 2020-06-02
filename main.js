@@ -145,7 +145,7 @@ function drawBorders() {
 }
 
 function formatTime(seconds) {
-  return `${(seconds / 60) | 0}:${seconds % 60}`;
+  return `${(seconds / 60) | 0}:${(seconds % 60).toString().padStart(2, "0")}`;
 }
 
 (function () {
@@ -174,7 +174,5 @@ function formatTime(seconds) {
 })();
 
 // TODO
-// responsive
-// code formatting
 // local over cdn
 // php includes and stuff
